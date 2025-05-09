@@ -1,0 +1,298 @@
+/**
+ * neyn ??.04.2025
+ * 
+ * Helper function to export missing language tags in order.
+ * 
+ * @param {string} fName 
+ * @param {string[]} schema 
+ * @param {string[]} toExport 
+ */
+const orderedExport = function(fName, schema, toExport) {
+    const file = new PrettyJSON(4);
+    file.open();
+
+    for(let i = 0; i < schema.length; i++) {
+        if(i >= toExport.length) {
+            file.writeLine(schema[i], "");
+        } else {
+            file.writeLine(schema[i], toExport[i]);
+        }
+    }
+
+    file.close();
+    file.download(fName);
+}
+
+/**
+ * neyn 12.04.2025
+ * 
+ * Helper function to re-order traits.
+ * 
+ * @param {string} fName 
+ */
+const exportTraits = function(fName){
+    const list = Object.keys(TRAITS);
+    const file = new PrettyJSON(4);
+    file.open();
+
+    for(let i = 0; i < list.length; i++) {
+        const traitID = list[i];
+        const trait = TRAITS[traitID];
+        const line = { "name": trait.name, "desc": trait.desc, "icon": `Assets/Traits/${traitID}.png` };
+
+        file.writeLine(traitID, line);
+    }
+
+    file.close();
+    file.download(fName);
+}
+
+/*
+[
+	["Kargit Dogs","Anima Ante Mortem"],
+	["Let us die","To make men free"],
+	["Ancestral Gangrene","A New Era"],
+	["Freedom, Equality, Tolerance","Elysium Shattered"],
+	["A taste of Warfare","A giant awakens"],
+	[]
+];
+*/
+
+
+const NAME_DATA = [];
+const NAMES = [];
+
+/*
+for(let i = 1; i < 6; i++) {
+    const campaign = NAME_DATA[i];
+    
+    for(let j = 0; j < 7; j++) {
+        if(j >= campaign.length) {
+            for(let k = 0; k < 5; k++) {
+                NAMES.push("");
+            }
+            continue;
+        }
+
+        const chapter = campaign[j];
+
+        for(let k = 0; k < 5; k++) {
+            if(k >= chapter.length) {
+                NAMES.push("");
+                continue;
+            }
+
+			const mission = chapter[k];
+
+			if(typeof mission === "object") {
+				if(mission.length === 0) {
+					NAMES.push("");
+				} else {
+					NAMES.push(mission[0]);
+				}
+			} else {
+				NAMES.push(mission);
+			}
+        }
+    }
+}
+*/
+/*
+for(let i = 0; i < 5; i++) {
+	const list = NAME_DATA[i];
+
+	for(let j = 0; j < 7; j++) {
+		if(j >= list.length) {
+			NAMES.push("");
+		} else {
+			NAMES.push(list[j]);
+		}
+	}
+}
+*/
+
+/*
+const SCHEMA = [
+    "MISSION_DESC_SOMERTIN_C1_M1",
+	"MISSION_DESC_SOMERTIN_C1_M2",
+	"MISSION_DESC_SOMERTIN_C1_M3",
+	"MISSION_DESC_SOMERTIN_C1_M4",
+	"MISSION_DESC_SOMERTIN_C1_M5",
+	"MISSION_DESC_SOMERTIN_C2_M1",
+	"MISSION_DESC_SOMERTIN_C2_M2",
+	"MISSION_DESC_SOMERTIN_C2_M3",
+	"MISSION_DESC_SOMERTIN_C2_M4",
+	"MISSION_DESC_SOMERTIN_C2_M5",
+	"MISSION_DESC_SOMERTIN_C3_M1",
+	"MISSION_DESC_SOMERTIN_C3_M2",
+	"MISSION_DESC_SOMERTIN_C3_M3",
+	"MISSION_DESC_SOMERTIN_C3_M4",
+	"MISSION_DESC_SOMERTIN_C3_M5",
+	"MISSION_DESC_SOMERTIN_C4_M1",
+	"MISSION_DESC_SOMERTIN_C4_M2",
+	"MISSION_DESC_SOMERTIN_C4_M3",
+	"MISSION_DESC_SOMERTIN_C4_M4",
+	"MISSION_DESC_SOMERTIN_C4_M5",
+	"MISSION_DESC_SOMERTIN_C5_M1",
+	"MISSION_DESC_SOMERTIN_C5_M2",
+	"MISSION_DESC_SOMERTIN_C5_M3",
+	"MISSION_DESC_SOMERTIN_C5_M4",
+	"MISSION_DESC_SOMERTIN_C5_M5",
+	"MISSION_DESC_SOMERTIN_C6_M1",
+	"MISSION_DESC_SOMERTIN_C6_M2",
+	"MISSION_DESC_SOMERTIN_C6_M3",
+	"MISSION_DESC_SOMERTIN_C6_M4",
+	"MISSION_DESC_SOMERTIN_C6_M5",
+	"MISSION_DESC_SOMERTIN_C7_M1",
+	"MISSION_DESC_SOMERTIN_C7_M2",
+	"MISSION_DESC_SOMERTIN_C7_M3",
+	"MISSION_DESC_SOMERTIN_C7_M4",
+	"MISSION_DESC_SOMERTIN_C7_M5",
+	
+	"MISSION_DESC_KARGIT_C1_M1",
+	"MISSION_DESC_KARGIT_C1_M2",
+	"MISSION_DESC_KARGIT_C1_M3",
+	"MISSION_DESC_KARGIT_C1_M4",
+	"MISSION_DESC_KARGIT_C1_M5",
+	"MISSION_DESC_KARGIT_C2_M1",
+	"MISSION_DESC_KARGIT_C2_M2",
+	"MISSION_DESC_KARGIT_C2_M3",
+	"MISSION_DESC_KARGIT_C2_M4",
+	"MISSION_DESC_KARGIT_C2_M5",
+	"MISSION_DESC_KARGIT_C3_M1",
+	"MISSION_DESC_KARGIT_C3_M2",
+	"MISSION_DESC_KARGIT_C3_M3",
+	"MISSION_DESC_KARGIT_C3_M4",
+	"MISSION_DESC_KARGIT_C3_M5",
+	"MISSION_DESC_KARGIT_C4_M1",
+	"MISSION_DESC_KARGIT_C4_M2",
+	"MISSION_DESC_KARGIT_C4_M3",
+	"MISSION_DESC_KARGIT_C4_M4",
+	"MISSION_DESC_KARGIT_C4_M5",
+	"MISSION_DESC_KARGIT_C5_M1",
+	"MISSION_DESC_KARGIT_C5_M2",
+	"MISSION_DESC_KARGIT_C5_M3",
+	"MISSION_DESC_KARGIT_C5_M4",
+	"MISSION_DESC_KARGIT_C5_M5",
+	"MISSION_DESC_KARGIT_C6_M1",
+	"MISSION_DESC_KARGIT_C6_M2",
+	"MISSION_DESC_KARGIT_C6_M3",
+	"MISSION_DESC_KARGIT_C6_M4",
+	"MISSION_DESC_KARGIT_C6_M5",
+	"MISSION_DESC_KARGIT_C7_M1",
+	"MISSION_DESC_KARGIT_C7_M2",
+	"MISSION_DESC_KARGIT_C7_M3",
+	"MISSION_DESC_KARGIT_C7_M4",
+	"MISSION_DESC_KARGIT_C7_M5",
+
+	"MISSION_DESC_TRANSKAL_C1_M1",
+	"MISSION_DESC_TRANSKAL_C1_M2",
+	"MISSION_DESC_TRANSKAL_C1_M3",
+	"MISSION_DESC_TRANSKAL_C1_M4",
+	"MISSION_DESC_TRANSKAL_C1_M5",
+	"MISSION_DESC_TRANSKAL_C2_M1",
+	"MISSION_DESC_TRANSKAL_C2_M2",
+	"MISSION_DESC_TRANSKAL_C2_M3",
+	"MISSION_DESC_TRANSKAL_C2_M4",
+	"MISSION_DESC_TRANSKAL_C2_M5",
+	"MISSION_DESC_TRANSKAL_C3_M1",
+	"MISSION_DESC_TRANSKAL_C3_M2",
+	"MISSION_DESC_TRANSKAL_C3_M3",
+	"MISSION_DESC_TRANSKAL_C3_M4",
+	"MISSION_DESC_TRANSKAL_C3_M5",
+	"MISSION_DESC_TRANSKAL_C4_M1",
+	"MISSION_DESC_TRANSKAL_C4_M2",
+	"MISSION_DESC_TRANSKAL_C4_M3",
+	"MISSION_DESC_TRANSKAL_C4_M4",
+	"MISSION_DESC_TRANSKAL_C4_M5",
+	"MISSION_DESC_TRANSKAL_C5_M1",
+	"MISSION_DESC_TRANSKAL_C5_M2",
+	"MISSION_DESC_TRANSKAL_C5_M3",
+	"MISSION_DESC_TRANSKAL_C5_M4",
+	"MISSION_DESC_TRANSKAL_C5_M5",
+	"MISSION_DESC_TRANSKAL_C6_M1",
+	"MISSION_DESC_TRANSKAL_C6_M2",
+	"MISSION_DESC_TRANSKAL_C6_M3",
+	"MISSION_DESC_TRANSKAL_C6_M4",
+	"MISSION_DESC_TRANSKAL_C6_M5",
+	"MISSION_DESC_TRANSKAL_C7_M1",
+	"MISSION_DESC_TRANSKAL_C7_M2",
+	"MISSION_DESC_TRANSKAL_C7_M3",
+	"MISSION_DESC_TRANSKAL_C7_M4",
+	"MISSION_DESC_TRANSKAL_C7_M5",
+
+	"MISSION_DESC_POLASIE_C1_M1",
+	"MISSION_DESC_POLASIE_C1_M2",
+	"MISSION_DESC_POLASIE_C1_M3",
+	"MISSION_DESC_POLASIE_C1_M4",
+	"MISSION_DESC_POLASIE_C1_M5",
+	"MISSION_DESC_POLASIE_C2_M1",
+	"MISSION_DESC_POLASIE_C2_M2",
+	"MISSION_DESC_POLASIE_C2_M3",
+	"MISSION_DESC_POLASIE_C2_M4",
+	"MISSION_DESC_POLASIE_C2_M5",
+	"MISSION_DESC_POLASIE_C3_M1",
+	"MISSION_DESC_POLASIE_C3_M2",
+	"MISSION_DESC_POLASIE_C3_M3",
+	"MISSION_DESC_POLASIE_C3_M4",
+	"MISSION_DESC_POLASIE_C3_M5",
+	"MISSION_DESC_POLASIE_C4_M1",
+	"MISSION_DESC_POLASIE_C4_M2",
+	"MISSION_DESC_POLASIE_C4_M3",
+	"MISSION_DESC_POLASIE_C4_M4",
+	"MISSION_DESC_POLASIE_C4_M5",
+	"MISSION_DESC_POLASIE_C5_M1",
+	"MISSION_DESC_POLASIE_C5_M2",
+	"MISSION_DESC_POLASIE_C5_M3",
+	"MISSION_DESC_POLASIE_C5_M4",
+	"MISSION_DESC_POLASIE_C5_M5",
+	"MISSION_DESC_POLASIE_C6_M1",
+	"MISSION_DESC_POLASIE_C6_M2",
+	"MISSION_DESC_POLASIE_C6_M3",
+	"MISSION_DESC_POLASIE_C6_M4",
+	"MISSION_DESC_POLASIE_C6_M5",
+	"MISSION_DESC_POLASIE_C7_M1",
+	"MISSION_DESC_POLASIE_C7_M2",
+	"MISSION_DESC_POLASIE_C7_M3",
+	"MISSION_DESC_POLASIE_C7_M4",
+	"MISSION_DESC_POLASIE_C7_M5",
+
+	"MISSION_DESC_ELAM_C1_M1",
+	"MISSION_DESC_ELAM_C1_M2",
+	"MISSION_DESC_ELAM_C1_M3",
+	"MISSION_DESC_ELAM_C1_M4",
+	"MISSION_DESC_ELAM_C1_M5",
+	"MISSION_DESC_ELAM_C2_M1",
+	"MISSION_DESC_ELAM_C2_M2",
+	"MISSION_DESC_ELAM_C2_M3",
+	"MISSION_DESC_ELAM_C2_M4",
+	"MISSION_DESC_ELAM_C2_M5",
+	"MISSION_DESC_ELAM_C3_M1",
+	"MISSION_DESC_ELAM_C3_M2",
+	"MISSION_DESC_ELAM_C3_M3",
+	"MISSION_DESC_ELAM_C3_M4",
+	"MISSION_DESC_ELAM_C3_M5",
+	"MISSION_DESC_ELAM_C4_M1",
+	"MISSION_DESC_ELAM_C4_M2",
+	"MISSION_DESC_ELAM_C4_M3",
+	"MISSION_DESC_ELAM_C4_M4",
+	"MISSION_DESC_ELAM_C4_M5",
+	"MISSION_DESC_ELAM_C5_M1",
+	"MISSION_DESC_ELAM_C5_M2",
+	"MISSION_DESC_ELAM_C5_M3",
+	"MISSION_DESC_ELAM_C5_M4",
+	"MISSION_DESC_ELAM_C5_M5",
+	"MISSION_DESC_ELAM_C6_M1",
+	"MISSION_DESC_ELAM_C6_M2",
+	"MISSION_DESC_ELAM_C6_M3",
+	"MISSION_DESC_ELAM_C6_M4",
+	"MISSION_DESC_ELAM_C6_M5",
+	"MISSION_DESC_ELAM_C7_M1",
+	"MISSION_DESC_ELAM_C7_M2",
+	"MISSION_DESC_ELAM_C7_M3",
+	"MISSION_DESC_ELAM_C7_M4",
+	"MISSION_DESC_ELAM_C7_M5"
+];
+*/
+
+//orderedExport("mdesc", SCHEMA, NAMES);
