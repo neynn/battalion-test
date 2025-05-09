@@ -4,7 +4,7 @@ const MainMenu = function(elementID) {
     this.buttons = new Map();
 
     this.image.classList.add("main_menu_image");
-    this.image.src="Assets/MainMenuScreens/Coloured Tanks.JPG";
+    this.image.src="Assets/MainMenuScreens/Coloured Tanks.jpg";
     this.element.appendChild(this.image);
 }
 

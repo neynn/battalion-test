@@ -643,12 +643,12 @@ function AttackingAnimation(unitID){
 
 		if(frame == 17) {
 			if(!type.MLPR) {
-				mesh.src = "Assets/Units/StaticMeshes/" + type.shortname + "Mesh" + direction + ".PNG";
+				mesh.src = "Assets/Units/StaticMeshes/" + type.shortname + "Mesh" + direction + ".png";
 			} else {
 				mesh.style.visibility = "hidden";
 			}
 
-			core.src = "Assets/Units/Static/" + type.shortname + direction + ".PNG";
+			core.src = "Assets/Units/Static/" + type.shortname + direction + ".png";
 			entity.style.left = (type.StaticOffsetX ?? [0,0,0,0,0])[unit.direction] + "px";
 			entity.style.top = (type.StaticOffsetY ?? [0,0,0,0,0])[unit.direction] + "px";
 			entity.style.zIndex = 4;

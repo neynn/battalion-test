@@ -5,7 +5,7 @@ const DISPLAY_TYPE = {
 
 /*
 let ElamFlagVariant=1; for(let j=1;j<5;j++){if(Campaigns[4][j-1][4].Finished??false){ElamFlagVariant=j+1}}; if(!MystSettChoice){ElamFlagVariant=1};
-document.getElementById('Elam Flag').src='Assets/Flags/FlagELM'+ElamFlagVariant+'.PNG'
+document.getElementById('Elam Flag').src='Assets/Flags/FlagELM'+ElamFlagVariant+'.png'
 */
 const addStoryEvents = function(battalion) {
     const { story, language } = battalion;
@@ -175,9 +175,9 @@ const showProgressData = function(battalion) {
         const chapterID = campaign.order[i];
 
         if(nextChapters.has(chapterID)) {
-            plaqueImage.src = "Assets/Miscellaneous/Plaque.PNG";
+            plaqueImage.src = "Assets/Miscellaneous/Plaque.png";
         } else {
-            plaqueImage.src = "Assets/Miscellaneous/NonPlaque.PNG";
+            plaqueImage.src = "Assets/Miscellaneous/NonPlaque.png";
         }
     }
 

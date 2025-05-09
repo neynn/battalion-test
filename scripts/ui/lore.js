@@ -16,9 +16,9 @@ const DisplayLoreLength = function(DocSize) {
 		const lengthIcon = document.getElementById(lengthIconID);
 
 		if(DocSize < i) {
-			lengthIcon.src = "Assets/Miscellaneous/DocShadow.PNG";
+			lengthIcon.src = "Assets/Miscellaneous/DocShadow.png";
 		} else {
-			lengthIcon.src = "Assets/Miscellaneous/DocIcon.PNG";
+			lengthIcon.src = "Assets/Miscellaneous/DocIcon.png";
 		}
 	}
 }

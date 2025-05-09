@@ -100,9 +100,9 @@ const showTraitDetail = function(context, traitID) {
 	const traitDesc = language.get(desc);
 
 	if(traitDesc.length > TRAIT_DESC_MAX_LENGTH) {
-		document.getElementById("TraitTooltipImage").src = "Assets/Miscellaneous/TraitTooltipPlus.PNG";
+		document.getElementById("TraitTooltipImage").src = "Assets/Miscellaneous/TraitTooltipPlus.png";
 	} else {
-		document.getElementById("TraitTooltipImage").src = "Assets/Miscellaneous/TraitTooltip.PNG";
+		document.getElementById("TraitTooltipImage").src = "Assets/Miscellaneous/TraitTooltip.png";
 	}
 	
 	document.getElementById("TraitName").innerHTML = traitName;
