@@ -35,8 +35,9 @@ StoryHandler.prototype.onScenarionWon = function() {
 		return;
 	}
 
-	this.events.emit(StoryHandler.EVENT.SCENARIO_WON, this.currentScenario, this.currentScenario.state === StoryNode.STATE.UNFINISHED);
-	this.currentScenario.finish();
+	const isFirst = this.currentScenario.finish();
+
+	this.events.emit(StoryHandler.EVENT.SCENARIO_WON, this.currentScenario, isFirst);
 	this.currentScenario = null;
 }
 
@@ -45,8 +46,9 @@ StoryHandler.prototype.onCampaignWon = function() {
 		return;
 	}
 
-	this.events.emit(StoryHandler.EVENT.CAMPAIGN_WON, this.currentCampaign, this.currentCampaign.state === StoryNode.STATE.UNFINISHED);
-	this.currentCampaign.finish();
+	const isFirst = this.currentCampaign.finish();
+
+	this.events.emit(StoryHandler.EVENT.CAMPAIGN_WON, this.currentCampaign, isFirst);
 	this.currentCampaign = null;
 
 	const isComplete = this.currentScenario.isComplete((campaignID) => {
@@ -65,8 +67,9 @@ StoryHandler.prototype.onChapterWon = function() {
 		return;
 	}
 
-	this.events.emit(StoryHandler.EVENT.CHAPTER_WON, this.currentChapter, this.currentChapter.state === StoryNode.STATE.UNFINISHED);
-	this.currentChapter.finish();
+	const isFirst = this.currentChapter.finish();
+
+	this.events.emit(StoryHandler.EVENT.CHAPTER_WON, this.currentChapter, isFirst);
 	this.currentChapter = null;
 
 	const isComplete = this.currentCampaign.isComplete((chapterID) => {
@@ -85,8 +88,9 @@ StoryHandler.prototype.onMissionWon = function() {
 		return;
 	}
 
-	this.events.emit(StoryHandler.EVENT.MISSION_WON, this.currentMission, this.currentMission.state === StoryNode.STATE.UNFINISHED);
-	this.currentMission.finish();
+	const isFirst = this.currentMission.finish();
+
+	this.events.emit(StoryHandler.EVENT.MISSION_WON, this.currentMission, isFirst);
 	this.currentMission = null;
 
 	const isComplete = this.currentChapter.isComplete((missionID) => {

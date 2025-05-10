@@ -8,8 +8,8 @@ const Battalion = function() {
     this.language = new LanguageHandler();
     this.story = new StoryHandler();
     this.morale = new RecruitMoraleHandler();
-    this.saveHandler = new SaveHandler();
     this.uiHandler = new UIHandler();
+    this.db = new BattalionDB();
 
     this.timer = new Timer();
     this.timer.input = () => this.client.update();
