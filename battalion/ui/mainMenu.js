@@ -51,7 +51,7 @@ MainMenu.prototype.createButtons = function(buttonTypes) {
     }
 }
 
-MainMenu.prototype.init = function() {
+MainMenu.prototype.init = function(battalion) {
     this.createButtons(UI.MAIN_MENU);
 
     this.addClick("BUTTON_CAMPAIGN", (button) => {

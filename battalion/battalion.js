@@ -59,7 +59,7 @@ Battalion.DIRECTION_FLIP = {
 
 Battalion.prototype.init = function() {
     this.story.init();
-    this.uiHandler.mainMenu.init();
+    this.uiHandler.mainMenu.init(this);
     this.uiHandler.updateLanguage(this);
     this.setState(Battalion.STATE.MAIN_MENU);
     this.timer.start();

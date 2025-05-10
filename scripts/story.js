@@ -41,12 +41,12 @@ const addStoryEvents = function(battalion) {
     }, { permanent: true });
     
     story.events.on(StoryHandler.EVENT.CHAPTER_WON, (chapter, isFirst) =>  {
-        const { type } = chapter;
-        const { interlogueImage, interlogue } = type;
-    
         console.log(chapter, isFirst, "HAS BEEN WON");
     
         if(isFirst) {
+            const { type } = chapter;
+            const { interlogueImage, interlogue } = type;
+    
             document.getElementById("InterlogueScreen").style.visibility = "visible";
             document.getElementById("InterlogueImage").src = interlogueImage;
             document.getElementById("InterlogueText").innerHTML = language.get(interlogue);
@@ -58,7 +58,9 @@ const addStoryEvents = function(battalion) {
     story.events.on(StoryHandler.EVENT.MISSION_WON, (mission, isFirst) =>  {
         console.log(mission, isFirst, "HAS BEEN WON");
 
-        db.saveProfile(PROFILE_ID, story.save());
+        if(isFirst) {
+            db.saveProfile(PROFILE_ID, story.save());
+        }
     }, { permanent: true });
 }
 
